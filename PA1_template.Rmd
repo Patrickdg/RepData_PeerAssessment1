@@ -6,17 +6,52 @@ output:
 ---
 
 
-## Loading and preprocessing the data
+## Loading and preprocessing the data 
 
+After loading the data using read.csv(), we transform the $date column of the data into class 'date' using as.date() for later use in creating the plots for analysis:
 
+```{r}
+unzip("activity.zip")
+data <- read.csv("activity.csv")
+data$date <- as.Date(as.character(data$date))
+```
 
 ## What is mean total number of steps taken per day?
 
+First, we will determine the # of steps taken on each observed day within the dataset:
+```{r}
+stepsbyday <- with(data,tapply(data$steps,data$date,sum, na.rm = T))
+```
 
+Next, we can create a histogram of the resulting data (i.e., the sum of steps taken per each observed day):
+```{r}
+hist(stepsbyday)
+```
+
+Lastly, we can determine the mean and median of the total number of steps taken per day by using the tapply and mean/median functions:
+```{r}
+with(data,tapply(data$steps,data$date,mean, na.rm = T))
+```
+
+```{r}
+with(data,tapply(data$steps,data$date,median))
+```
 
 ## What is the average daily activity pattern?
+To visualize the average daily activity pattern, we can average the steps across all observed days for each 5-minute interval and graph the means in a time-series plot. First, we calculate the average steps taken within each 5-minute interval across all observed days by using the tapply function coupled with the mean function:
+```{r, results = 'hide'}
+z <- with(data,tapply(data$steps,data$interval,mean,na.rm = T))
+```
+Then, we create a plot using the names of the 'z' variable (aka. the 5-minute intervals) and the mean steps taken within each interval across all days ('z'):
 
+```{r}
+plot(names(z),z,type = "l")
+```
 
+To determine the 5-minute interval with the maximum mean number of steps, we can use the following code: 
+```{r}
+names(z[match(max(z),z)])
+```
 
 ## Imputing missing values
 
