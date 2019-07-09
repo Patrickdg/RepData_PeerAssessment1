@@ -136,6 +136,13 @@ sum(is.na(data$steps))
 
 ```r
 library(data.table)
+```
+
+```
+## data.table 1.12.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
+```
+
+```r
 data2 <- as.data.table(data)
 data2[,m:= {tmp <- match(data2$interval,names(z)); z[tmp]}]
 

@@ -274,8 +274,9 @@ medians</code></pre>
 <pre class="r"><code>sum(is.na(data$steps))</code></pre>
 <pre><code>## [1] 2304</code></pre>
 <p>2 &amp; 3 - The chosen strategy for imputing missing values will be to use the mean for the 5-minute intervals calculated across all observed days (aka. the ‘z’ vector calculated above). We can use the data.table package to accomplish this with the folowing code:</p>
-<pre class="r"><code>library(data.table)
-data2 &lt;- as.data.table(data)
+<pre class="r"><code>library(data.table)</code></pre>
+<pre><code>## data.table 1.12.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com</code></pre>
+<pre class="r"><code>data2 &lt;- as.data.table(data)
 data2[,m:= {tmp &lt;- match(data2$interval,names(z)); z[tmp]}]
 
 data2$n[is.na(data2$steps) ] &lt;- data2$m[is.na(data2$steps)]
