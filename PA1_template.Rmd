@@ -89,6 +89,7 @@ In the final 2 lines of code:
 stepsbyday2 <- with(data2,tapply(data2$n,data2$date,sum, na.rm = T))
 hist(stepsbyday2, xlab = "Steps by Day")
 ```
+
 The mean of steps per day is calculated as follows: 
 ```{r}
 means2 <- with(data2,tapply(data2$n,data2$date,mean, na.rm = T))
