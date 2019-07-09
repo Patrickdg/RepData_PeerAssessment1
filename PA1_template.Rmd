@@ -150,7 +150,7 @@ final$Day <- as.factor(final$Day)
 ```
 
 
-Using the lattice plotting system, we can create a plot for the average steps taken across all days based on the newly created factor variable 'w' (Weekday or Weekend): 
+Using the lattice plotting system, we can create a plot for the average steps taken across all days based on the newly created data table (Weekday or Weekend): 
 ```{r}
 library(lattice)
 xyplot(AverageSteps ~ Interval | Day, data = final, layout = c(1,2), type = "l")
